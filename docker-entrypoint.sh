@@ -11,7 +11,8 @@ if [ "$1" = 'apache2' ]; then
     if [ ! -d "$APP_ROOT/courses/admin"  ]; then
         # wait for db to start up
         echo "Waiting for database to start..."
-        while ! timeout 1 bash -c "(cat < /dev/null > /dev/tcp/$WEBWORK_DB_HOST/$WEBWORK_DB_PORT) >/dev/null 2>&1"; do sleep 0.5; done
+        # while ! timeout 1 bash -c "(cat < /dev/null > /dev/tcp/$WEBWORK_DB_HOST/$WEBWORK_DB_PORT) >/dev/null 2>&1"; do sleep 0.5; done
+	until nc -z $WEBWORK_DB_HOST $WEBWORK_DB_PORT; do sleep 0.5; done
         newgrp www-data
         umask 2
         cd $APP_ROOT/courses

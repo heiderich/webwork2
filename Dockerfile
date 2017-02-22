@@ -27,6 +27,7 @@ ENV DEV 0
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends --no-install-suggests \
+       netcat \
        apache2 \
        curl \
        dvipng \
